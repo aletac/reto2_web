@@ -26,6 +26,9 @@ import reto2_web.Service.UserService;
  * @author Alejandro Tacue
  */
 
+/**
+ * Esta clase define el controlador de user
+ */
 @RestController
 @RequestMapping("api/user")
 @CrossOrigin("*")
@@ -33,39 +36,74 @@ public class UserController {
  @Autowired
     private UserService userService;
 
+    /**
+     *
+     * @return lista de usuarios
+     */
     @GetMapping("/all")
     public List<User> getAll() {
         return userService.getAll();
     }
-    
+
+    /**
+     *
+     * @param id
+     * @return usuario por id
+     */
     @GetMapping("/{id}")
     public Optional <User> getUser(@PathVariable("id") int id) {
         return userService.getUser(id);
     }
 
+    /**
+     *
+     * @param user
+     * @return crea usuario
+     */
     @PostMapping("/new")
     @ResponseStatus(HttpStatus.CREATED)
     public User create(@RequestBody User user) {
         return userService.create(user);
     }
-    
+
+    /**
+     *
+     * @param user
+     * @return actualiza usuario
+     */
     @PutMapping("/update")
     @ResponseStatus(HttpStatus.CREATED)
     public User update(@RequestBody User user) {
         return userService.update(user);
     }
 
+    /**
+     *
+     * @param id
+     * @return elimina usuario
+     */
     @DeleteMapping("/{id}")
     @ResponseStatus(HttpStatus.NO_CONTENT)
     public boolean delete(@PathVariable("id") int id) {
         return userService.delete(id);
     }
-    
+
+    /**
+     *
+     * @param email
+     * @param password
+     * @return autentica usuario
+     */
     @GetMapping("/{email}/{password}")
     public User authenticateUser(@PathVariable("email") String email, @PathVariable("password") String password) {
         return userService.authenticateUser(email, password);
     }
-    
+
+    /**
+     *
+     * @param email
+     * @return boolean validacion de existencia
+     */
     @GetMapping("/emailexist/{email}")
     public boolean emailExists(@PathVariable("email") String email) {
         return userService.emailExists(email);

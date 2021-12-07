@@ -37,6 +37,10 @@ public class HairProductService {
         if (hairProducts.getReference() != null) {
             Optional<HairProducts> accesoryDb = hairProductsRepository.getProduct(hairProducts.getReference());
             if (!accesoryDb.isEmpty()) {
+
+                if (hairProducts.getName()!= null) {
+                    accesoryDb.get().setName(hairProducts.getName());
+                }
                 
                 if (hairProducts.getBrand()!= null) {
                     accesoryDb.get().setBrand(hairProducts.getBrand());
